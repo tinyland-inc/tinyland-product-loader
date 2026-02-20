@@ -1,5 +1,5 @@
 /**
- * @tinyland-inc/tinyland-product-loader
+ * @tummycrypt/tinyland-product-loader
  *
  * Framework-agnostic product content loader with filtering, search,
  * and related-product resolution.
@@ -10,7 +10,7 @@
  *   configure,
  *   loadProductsServer,
  *   getPublishedProductsServer,
- * } from '@tinyland-inc/tinyland-product-loader';
+ * } from '@tummycrypt/tinyland-product-loader';
  *
  * configure({ loadContent: myContentLoader });
  * const products = getPublishedProductsServer();

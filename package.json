@@ -1,5 +1,5 @@
 {
-  "name": "@tinyland-inc/tinyland-product-loader",
+  "name": "@tummycrypt/tinyland-product-loader",
   "version": "0.1.0",
   "description": "Product content loader with filtering, search, and related products",
   "type": "module",
@@ -42,5 +42,9 @@
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }

@@ -1,5 +1,5 @@
 /**
- * Vitest Configuration for @tinyland-inc/tinyland-product-loader
+ * Vitest Configuration for @tummycrypt/tinyland-product-loader
  *
  * Works in three modes:
  *   1. Standalone:  cd packages/tinyland-product-loader && pnpm test

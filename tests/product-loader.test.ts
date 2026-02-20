@@ -1,5 +1,5 @@
 /**
- * Tests for @tinyland-inc/tinyland-product-loader
+ * Tests for @tummycrypt/tinyland-product-loader
  *
  * 11 test categories covering types, config DI, and all 9 loader functions.
  */
