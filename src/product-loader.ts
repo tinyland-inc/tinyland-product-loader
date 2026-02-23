@@ -1,17 +1,17 @@
-/**
- * Product loader functions.
- *
- * All functions are synchronous and stateless -- they read products fresh from
- * the configured content loader on every call (no caching).
- */
+
+
+
+
+
+
 
 import type { Product, ProductFrontmatter } from './types.js';
 import { getContentLoader } from './config.js';
 
-/**
- * Load all products from the configured content loader.
- * Products are sorted by `order` (ascending) then alphabetically by `name`.
- */
+
+
+
+
 export function loadProductsServer(): Product[] {
   const products: Product[] = [];
 
@@ -43,7 +43,7 @@ export function loadProductsServer(): Product[] {
       });
     }
 
-    // Sort by order first (when both have order), then alphabetically by name
+    
     products.sort((a, b) => {
       if (
         a.frontmatter.order !== undefined &&
@@ -61,19 +61,19 @@ export function loadProductsServer(): Product[] {
   }
 }
 
-/**
- * Get published products only.
- * A product is considered published unless `published` is explicitly `false`.
- */
+
+
+
+
 export function getPublishedProductsServer(): Product[] {
   const products = loadProductsServer();
   return products.filter((product) => product.frontmatter.published !== false);
 }
 
-/**
- * Get featured products (published only).
- * @param limit - Optional maximum number of results.
- */
+
+
+
+
 export function getFeaturedProductsServer(limit?: number): Product[] {
   const products = getPublishedProductsServer();
   const featured = products.filter(
@@ -82,19 +82,19 @@ export function getFeaturedProductsServer(limit?: number): Product[] {
   return limit ? featured.slice(0, limit) : featured;
 }
 
-/**
- * Find a single product by its slug.
- * @returns The matching product or `null`.
- */
+
+
+
+
 export function getProductBySlugServer(slug: string): Product | null {
   const products = loadProductsServer();
   return products.find((product) => product.slug === slug) || null;
 }
 
-/**
- * Get published products in a specific category.
- * Comparison is case-sensitive.
- */
+
+
+
+
 export function getProductsByCategoryServer(category: string): Product[] {
   const products = getPublishedProductsServer();
   return products.filter(
@@ -102,9 +102,9 @@ export function getProductsByCategoryServer(category: string): Product[] {
   );
 }
 
-/**
- * Get all unique category strings from published products, sorted.
- */
+
+
+
 export function getAllCategoriesServer(): string[] {
   const products = getPublishedProductsServer();
   const categorySet = new Set<string>();
@@ -116,9 +116,9 @@ export function getAllCategoriesServer(): string[] {
   return Array.from(categorySet).sort();
 }
 
-/**
- * Get all unique tags from published products, sorted.
- */
+
+
+
 export function getAllProductTagsServer(): string[] {
   const products = getPublishedProductsServer();
   const tagSet = new Set<string>();
@@ -128,10 +128,10 @@ export function getAllProductTagsServer(): string[] {
   return Array.from(tagSet).sort();
 }
 
-/**
- * Search published products across name, description, excerpt, tagline,
- * content, and tags. Search is case-insensitive.
- */
+
+
+
+
 export function searchProductsServer(query: string): Product[] {
   const products = getPublishedProductsServer();
   const searchTerm = query.toLowerCase();
@@ -165,11 +165,11 @@ export function searchProductsServer(query: string): Product[] {
   });
 }
 
-/**
- * Get related products by category or shared tags (published only).
- * @param currentSlug - Slug of the product to find relations for.
- * @param limit - Maximum number of related products to return (default 3).
- */
+
+
+
+
+
 export function getRelatedProductsServer(
   currentSlug: string,
   limit: number = 3
@@ -182,14 +182,14 @@ export function getRelatedProductsServer(
   const related = products.filter((product) => {
     if (product.slug === currentSlug) return false;
 
-    // Check for matching category
+    
     if (
       product.frontmatter.category === currentProduct.frontmatter.category
     ) {
       return true;
     }
 
-    // Check for matching tags
+    
     const currentTags = currentProduct.frontmatter.tags || [];
     const productTags = product.frontmatter.tags || [];
     const hasMatchingTag = currentTags.some((tag) =>

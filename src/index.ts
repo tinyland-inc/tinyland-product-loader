@@ -1,23 +1,23 @@
-/**
- * @tummycrypt/tinyland-product-loader
- *
- * Framework-agnostic product content loader with filtering, search,
- * and related-product resolution.
- *
- * @example
- * ```ts
- * import {
- *   configure,
- *   loadProductsServer,
- *   getPublishedProductsServer,
- * } from '@tummycrypt/tinyland-product-loader';
- *
- * configure({ loadContent: myContentLoader });
- * const products = getPublishedProductsServer();
- * ```
- */
 
-// Types
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export type {
   Product,
   ProductFrontmatter,
@@ -25,7 +25,7 @@ export type {
   LoadedContent,
 } from './types.js';
 
-// Configuration
+
 export {
   configure,
   getConfig,
@@ -34,7 +34,7 @@ export {
 
 export type { ProductLoaderConfig } from './config.js';
 
-// Loader functions
+
 export {
   loadProductsServer,
   getPublishedProductsServer,
