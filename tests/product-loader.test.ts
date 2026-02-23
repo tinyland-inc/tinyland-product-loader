@@ -1,8 +1,8 @@
-/**
- * Tests for @tummycrypt/tinyland-product-loader
- *
- * 11 test categories covering types, config DI, and all 9 loader functions.
- */
+
+
+
+
+
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import type { Product, ProductFrontmatter, LoadedContent } from '../src/types.js';
@@ -24,9 +24,9 @@ import {
   getRelatedProductsServer,
 } from '../src/product-loader.js';
 
-// ---------------------------------------------------------------------------
-// Test helpers
-// ---------------------------------------------------------------------------
+
+
+
 
 function createMockLoader(
   items: LoadedContent[]
@@ -50,9 +50,9 @@ function makeProducts(...items: LoadedContent[]): void {
   configure({ loadContent: createMockLoader(items) });
 }
 
-// ---------------------------------------------------------------------------
-// 1. Types (5+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('Types', () => {
   it('Product has required shape with frontmatter, content, slug', () => {
@@ -142,9 +142,9 @@ describe('Types', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 2. Config DI (10+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('Config DI', () => {
   beforeEach(() => {
@@ -187,8 +187,8 @@ describe('Config DI', () => {
   });
 
   it('loader functions throw when no loader is configured', () => {
-    // loadProductsServer catches errors and returns [] via console.error,
-    // but getContentLoader itself throws.
+    
+    
     resetConfig();
     const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const result = loadProductsServer();
@@ -223,9 +223,9 @@ describe('Config DI', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 3. loadProductsServer (15+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('loadProductsServer', () => {
   beforeEach(() => {
@@ -323,7 +323,7 @@ describe('loadProductsServer', () => {
       makeItem({ metadata: { name: 'No Order', slug: 'no', description: '', category: 'tool' }, slug: 'no' }),
       makeItem({ metadata: { name: 'Ordered', slug: 'ord', description: '', category: 'tool', order: 1 }, slug: 'ord' })
     );
-    // One has order and one doesn't, so localeCompare is used
+    
     const result = loadProductsServer();
     expect(result).toHaveLength(2);
   });
@@ -358,9 +358,9 @@ describe('loadProductsServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 4. getPublishedProductsServer (10+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getPublishedProductsServer', () => {
   beforeEach(() => {
@@ -424,7 +424,7 @@ describe('getPublishedProductsServer', () => {
 
   it('treats published=0 as published (not strictly false)', () => {
     makeProducts(makeItem({ metadata: { name: 'A', slug: 'a', description: '', category: 'tool', published: 0 } }));
-    // 0 !== false in strict comparison
+    
     expect(getPublishedProductsServer()).toHaveLength(1);
   });
 
@@ -434,9 +434,9 @@ describe('getPublishedProductsServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 5. getFeaturedProductsServer (8+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getFeaturedProductsServer', () => {
   beforeEach(() => {
@@ -502,14 +502,14 @@ describe('getFeaturedProductsServer', () => {
     makeProducts(
       makeItem({ metadata: { name: 'A', slug: 'a', description: '', category: 'tool', featured: 'true' }, slug: 'a' })
     );
-    // featured === true is strict
+    
     expect(getFeaturedProductsServer()).toHaveLength(0);
   });
 });
 
-// ---------------------------------------------------------------------------
-// 6. getProductBySlugServer (5+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getProductBySlugServer', () => {
   beforeEach(() => {
@@ -558,9 +558,9 @@ describe('getProductBySlugServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 7. getProductsByCategoryServer (5+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getProductsByCategoryServer', () => {
   beforeEach(() => {
@@ -605,9 +605,9 @@ describe('getProductsByCategoryServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 8. getAllCategoriesServer (5+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getAllCategoriesServer', () => {
   beforeEach(() => {
@@ -658,9 +658,9 @@ describe('getAllCategoriesServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 9. getAllProductTagsServer (5+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getAllProductTagsServer', () => {
   beforeEach(() => {
@@ -706,9 +706,9 @@ describe('getAllProductTagsServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 10. searchProductsServer (15+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('searchProductsServer', () => {
   beforeEach(() => {
@@ -779,7 +779,7 @@ describe('searchProductsServer', () => {
     makeProducts(
       makeItem({ metadata: { name: 'A', slug: 'a', description: '', category: 'tool' }, slug: 'a' })
     );
-    // Empty string is included in every string
+    
     expect(searchProductsServer('')).toHaveLength(1);
   });
 
@@ -837,9 +837,9 @@ describe('searchProductsServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 11. getRelatedProductsServer (10+)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getRelatedProductsServer', () => {
   beforeEach(() => {
@@ -921,7 +921,7 @@ describe('getRelatedProductsServer', () => {
       makeItem({ metadata: { name: 'D', slug: 'd', description: '', category: 'guide', tags: ['python'] }, slug: 'd' })
     );
     const related = getRelatedProductsServer('a');
-    // B matches by category, C matches by tag
+    
     expect(related).toHaveLength(2);
     const slugs = related.map((p) => p.slug);
     expect(slugs).toContain('b');
