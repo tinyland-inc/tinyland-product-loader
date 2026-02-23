@@ -1,11 +1,11 @@
-/**
- * Vitest Configuration for @tummycrypt/tinyland-product-loader
- *
- * Works in three modes:
- *   1. Standalone:  cd packages/tinyland-product-loader && pnpm test
- *   2. Workspace:   vitest run --project=tinyland-product-loader (from root)
- *   3. Bazel:       bazel test //packages/tinyland-product-loader:test
- */
+
+
+
+
+
+
+
+
 
 import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'node:url';
