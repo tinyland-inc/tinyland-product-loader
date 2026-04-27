@@ -45,7 +45,7 @@ npm_package(
         ":tinyland_product_loader",
     ],
     package = "@tummycrypt/tinyland-product-loader",
-    version = "0.2.2",
+    version = "0.2.3",
     visibility = ["//visibility:public"],
 )
 
